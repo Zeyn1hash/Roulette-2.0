@@ -22,3 +22,7 @@ class Roulette:
     def draw(self, surface):
         for key, sector in self.variants.items():
             sector.draw_filled_sector(surface)
+
+    def add(self, sector: Sector, name: str):
+        self.variants[name]=sector
+        self.recalculate_angles()
