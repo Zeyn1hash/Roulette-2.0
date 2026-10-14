@@ -5,6 +5,8 @@ import sys
 from assets.classes.roulette import Roulette
 from assets.classes.sector import Sector
 from assets.classes.button import Button
+from assets.classes.variant_window import VariantWindow
+
 
 # Ініціалізація Pygame
 init()
@@ -18,16 +20,16 @@ GREEN = (0, 200, 100)
 YELLOW = (250, 200, 0)
 
 roulette=Roulette((350, 350), 200, 3)
-roulette.variants={"1": Sector("green", roulette.center, roulette.radius, 0, 360),
+"""roulette.variants={"1": Sector("green", roulette.center, roulette.radius, 0, 360),
                    "2": Sector("blue", roulette.center, roulette.radius, 0, 360),
                    "3": Sector("red", roulette.center, roulette.radius, 0, 360),
                    "4": Sector("yellow", roulette.center, roulette.radius, 0, 360),
-                   }
+                   }"""
 
 def random_sector():
     return Sector((randint(0, 255), randint(0, 255), randint(0, 255)), roulette.center, roulette.radius, 0, 1)
-button=Button((650, 300), (300, 100), "ADD", (0, 255, 0))
-
+button=Button((650, 600), (300, 100), "ADD", (0, 255, 0))
+variant_window=VariantWindow((750, 0), (250, 400))
 sectors_num=5
 button.bind(lambda: roulette.add(random_sector(), f"{sectors_num}"))
 roulette.recalculate_angles()
@@ -46,5 +48,6 @@ while True:
 
     roulette.draw(screen)
     button.draw(screen)
+    variant_window.draw(screen)
 
     display.update()
