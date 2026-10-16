@@ -5,7 +5,7 @@ from assets.classes.button import Button
 
 
 class Variant:
-    def __init__(self, name: str, position: tuple, size: tuple, color: tuple):
+    def __init__(self, name: str, color: tuple, position: tuple=(0, 50), size: tuple=(250, 50)):
         self.name=name
         self.position=position
         self.size=size

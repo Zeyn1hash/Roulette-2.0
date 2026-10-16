@@ -4,23 +4,28 @@ from assets.classes.sector import Sector
 
 
 class Roulette:
-    def __init__(self, center: tuple, radius: int, length: int):
+    def __init__(self, center: tuple, radius: int):
         self.center=center
         self.radius=radius
-        self.variants={"Base": Sector("green", self.center, self.radius, 0, 360)}
+        self.variants=[]
+
         self.length=len(self.variants)
+
+    def update(self, new_sector):
+        self.variants.append(new_sector)
+        self.recalculate_angles()
 
     def recalculate_angles(self):
         self.length = len(self.variants)
         angle=360/self.length
         start_angle=0
-        for key, sector in self.variants.items():
+        for sector in self.variants:
             sector.start_angle=start_angle
             sector.stop_angle=start_angle+angle
             start_angle+=angle
 
     def draw(self, surface):
-        for key, sector in self.variants.items():
+        for sector in self.variants:
             sector.draw_filled_sector(surface)
 
     def add(self, sector: Sector, name: str):

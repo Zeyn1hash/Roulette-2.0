@@ -1,6 +1,8 @@
 from pygame import *
 from pygame.font import Font
 
+init()
+
 
 class Button:
     def __init__(self, position: tuple, size: tuple, text: str, color: tuple, text_color="black"):
@@ -12,10 +14,9 @@ class Button:
         self.color=color
         self.function=None
 
-        font = Font(None, self.size[1])
+        s_font = Font(None, self.size[1])
         self.text_color=text_color
-        self.text=font.render(text, True, self.text_color)
-
+        self.text=s_font.render(text, True, self.text_color)
 
     def bind(self, function):
         self.function=function

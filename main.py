@@ -1,12 +1,9 @@
 from pygame import *
-from random import randint
 import sys
 
-from assets.classes.roulette import Roulette
-from assets.classes.sector import Sector
 from assets.classes.button import Button
-from assets.classes.variant_window import VariantWindow
 
+from roulette_manager import add_variant, roulette, variant_window, variants_list
 
 # Ініціалізація Pygame
 init()
@@ -19,20 +16,10 @@ BLUE = (0, 128, 255)
 GREEN = (0, 200, 100)
 YELLOW = (250, 200, 0)
 
-roulette=Roulette((350, 350), 200, 3)
-"""roulette.variants={"1": Sector("green", roulette.center, roulette.radius, 0, 360),
-                   "2": Sector("blue", roulette.center, roulette.radius, 0, 360),
-                   "3": Sector("red", roulette.center, roulette.radius, 0, 360),
-                   "4": Sector("yellow", roulette.center, roulette.radius, 0, 360),
-                   }"""
-
-def random_sector():
-    return Sector((randint(0, 255), randint(0, 255), randint(0, 255)), roulette.center, roulette.radius, 0, 1)
-button=Button((650, 600), (300, 100), "ADD", (0, 255, 0))
-variant_window=VariantWindow((750, 0), (250, 400))
+add_button=Button(variant_window.position, (variant_window.size[0], 50), "+", (255, 255, 255))
 sectors_num=5
-button.bind(lambda: roulette.add(random_sector(), f"{sectors_num}"))
-roulette.recalculate_angles()
+add_button.bind(lambda: add_variant(f"{sectors_num}"))
+
 # Головний цикл програми
 while True:
     for e in event.get():
@@ -40,14 +27,14 @@ while True:
             quit()
             sys.exit()
         if e.type==MOUSEBUTTONDOWN:
-            if button.rect.collidepoint(e.pos):
-                button.click()
+            if add_button.rect.collidepoint(e.pos):
+                add_button.click()
                 sectors_num+=1
 
     screen.fill(WHITE)
 
     roulette.draw(screen)
-    button.draw(screen)
     variant_window.draw(screen)
+    add_button.draw(screen)
 
     display.update()
