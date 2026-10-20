@@ -31,6 +31,17 @@ while True:
                 add_button.click()
                 sectors_num+=1
 
+            for var in variant_window.variants:
+                if var.del_rect.rect.collidepoint(e.pos):
+                    var.del_rect.click()
+                    print("a")
+        if e.type==MOUSEWHEEL:
+            if variant_window.rect.collidepoint(mouse.get_pos()):
+                if e.y<=-1:
+                    variant_window.scroll_down()
+                else:
+                    variant_window.scroll_up()
+
     screen.fill(WHITE)
 
     roulette.draw(screen)

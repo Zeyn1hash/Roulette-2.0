@@ -10,7 +10,7 @@ wheel_data={"center": (350, 350),
             "radius": 200}
 
 variants_list=[{"Base": [Variant("Base", (0, 255, 0)),
-                         Sector((0, 255, 0), wheel_data["center"], wheel_data["radius"], 0, 360)]}]
+                         Sector("Base", (0, 255, 0), wheel_data["center"], wheel_data["radius"])]}]
 
 variant_window=VariantWindow((750, 0), (250, 450))
 roulette=Roulette(wheel_data["center"], wheel_data["radius"])
@@ -29,9 +29,8 @@ def add_variant(name):
     random_color=(randint(0, 255), randint(0, 255), randint(0, 255))
 
     variant=Variant(name, random_color)
-    sector=Sector(random_color, wheel_data["center"], wheel_data["radius"], 0, 360)
-    variants_list.append(
-        {name: [variant, sector]})
+    sector=Sector(name, random_color, wheel_data["center"], wheel_data["radius"])
+    variants_list.append({name: [variant, sector]})
 
     roulette.update(sector)
     variant_window.update(variant)
