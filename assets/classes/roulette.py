@@ -11,8 +11,7 @@ class Roulette:
 
         self.length=len(self.variants)
 
-    def update(self, new_sector):
-        self.variants.append(new_sector)
+    def update(self):
         self.recalculate_angles()
 
     def recalculate_angles(self):
